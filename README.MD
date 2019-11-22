@@ -1,0 +1,1 @@
+Pass a file with brainfuck code as an argument to the binary to run your code.
