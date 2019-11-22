@@ -37,6 +37,7 @@ AST rule_loop()
 	memset((void*)&astLoop, '\0', sizeof(astLoop));
 	
 	u32 capacity = 32;
+	u32 capacityD = 32;
 	astLoop.children = (AST*)calloc(capacity, sizeof(AST));
 	CHECK_PTR(astLoop.children);
 	
@@ -57,7 +58,7 @@ AST rule_loop()
 		if (astLoop.nChildren == capacity - 1)
 		{
 			AST* prev = astLoop.children;
-			astLoop.children = (AST*)calloc(capacity + capacity, sizeof(AST));
+			astLoop.children = (AST*)calloc(capacity += capacityD, sizeof(AST));
 		    CHECK_PTR(astLoop.children);
 			
 			memcpy((void*)astLoop.children, (void*)prev, astLoop.nChildren * sizeof(AST));
@@ -72,7 +73,8 @@ AST rule_loop()
 AST *rule_program()
 {
 	u32 capacity = 64;
-	
+	u32 capacityD = 64;
+
 	AST *prog = (AST*)calloc(1, sizeof(AST));
 	CHECK_PTR(prog);
 	
@@ -94,7 +96,7 @@ AST *rule_program()
 		if (prog->nChildren == capacity - 1)
 		{
 			AST* prev = prog->children;
-			prog->children = (AST*)calloc(capacity + capacity, sizeof(AST));
+			prog->children = (AST*)calloc(capacity += capacityD, sizeof(AST));
 		    CHECK_PTR(prog->children);
 			
 			memcpy((void*)prog->children, (void*)prev, prog->nChildren * sizeof(AST));
